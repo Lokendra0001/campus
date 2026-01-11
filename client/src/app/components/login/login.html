@@ -1,0 +1,415 @@
+<div class="container-fluid vh-100 p-5">
+  <div class="row g-0 h-100">
+    <!-- Left Panel - Welcome Section -->
+    <div class="col-lg-6 d-flex flex-column p-4 p-lg-5 bg-primary bg-opacity-10">
+      <!-- Logo -->
+      <div class="mb-4 mb-lg-5">
+        <h1 class="h3 fw-bold text-primary mb-0">
+          <i class="bi bi-compass me-2"></i>CampusFind
+        </h1>
+        <p class="text-muted small">University Lost & Found Platform</p>
+      </div>
+
+      <!-- Welcome Content -->
+      <div class="flex-grow-1 d-flex flex-column justify-content-center">
+        <div class="mb-5">
+          <h2 class="display-4 fw-bold text-dark mb-3">
+            {{ isSignUp ? 'Join Our Community!' : 'Welcome Back!' }}
+          </h2>
+          <h3 class="h2 text-secondary mb-4">
+            {{ isSignUp ? 'Create your CampusFind account' : 'Sign in to your CampusFind account' }}
+          </h3>
+          <p class="lead text-muted mb-0">
+            Reuniting lost items with their owners across campus. 
+            Join our community of helpful students and staff.
+          </p>
+        </div>
+
+        <!-- Campus Stats -->
+        <div class="row g-4 mt-4">
+          <div class="col-md-4">
+            <div class="card border-0 bg-white shadow-sm">
+              <div class="card-body text-center">
+                <i class="bi bi-box-seam-fill text-primary fs-3 mb-2"></i>
+                <h4 class="h5 fw-bold mb-1">1,250+</h4>
+                <p class="text-muted small mb-0">Items Found</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card border-0 bg-white shadow-sm">
+              <div class="card-body text-center">
+                <i class="bi bi-people-fill text-success fs-3 mb-2"></i>
+                <h4 class="h5 fw-bold mb-1">850+</h4>
+                <p class="text-muted small mb-0">Happy Owners</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card border-0 bg-white shadow-sm">
+              <div class="card-body text-center">
+                <i class="bi bi-building-fill text-warning fs-3 mb-2"></i>
+                <h4 class="h5 fw-bold mb-1">12</h4>
+                <p class="text-muted small mb-0">Campus Buildings</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Panel - Login/Signup Form -->
+    <div class="col-lg-6 d-flex align-items-center p-4 p-lg-5 bg-white">
+      <div class="w-100" style="max-width: 420px;">
+        
+        <!-- Login Form -->
+        <div *ngIf="!isSignUp">
+          <!-- Header -->
+          <div class="text-center mb-5">
+            <div class="rounded-circle bg-primary bg-opacity-10 p-3 d-inline-flex mb-3">
+              <i class="bi bi-person-circle text-primary fs-1"></i>
+            </div>
+            <h2 class="h1 fw-bold text-dark mb-2">Sign In</h2>
+            <p class="text-muted">Welcome back! Please enter your campus credentials</p>
+          </div>
+
+          <!-- Login Form -->
+          <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+            <!-- Campus ID/Email -->
+            <div class="mb-4">
+              <label class="form-label fw-semibold text-dark">
+                <i class="bi bi-person-badge text-primary me-2"></i>
+                Campus ID / Email
+              </label>
+              <div class="input-group">
+                <span class="input-group-text bg-light border-end-0">
+                  <i class="bi bi-at text-muted"></i>
+                </span>
+                <input
+                  type="text"
+                  [(ngModel)]="loginData.username"
+                  name="username"
+                  class="form-control border-start-0"
+                  placeholder="student.id@university.edu"
+                  required
+                >
+              </div>
+              <small class="text-muted">Use your campus email or student ID</small>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-4">
+              <label class="form-label fw-semibold text-dark">
+                <i class="bi bi-lock text-primary me-2"></i>
+                Password
+              </label>
+              <div class="input-group">
+                <span class="input-group-text bg-light border-end-0">
+                  <i class="bi bi-key text-muted"></i>
+                </span>
+                <input
+                  [type]="showPassword ? 'text' : 'password'"
+                  [(ngModel)]="loginData.password"
+                  name="password"
+                  class="form-control border-start-0"
+                  placeholder="Enter your password"
+                  required
+                >
+                <button 
+                  type="button" 
+                  class="btn btn-outline-secondary border-start-0"
+                  (click)="togglePassword()"
+                >
+                  <i class="bi" [class.bi-eye]="!showPassword" [class.bi-eye-slash]="showPassword"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- User Type Selection -->
+            <div class="mb-4">
+              <label class="form-label fw-semibold text-dark">
+                <i class="bi bi-person-rolodex text-primary me-2"></i>
+                I am a
+              </label>
+              <div class="btn-group w-100" role="group">
+                <input type="radio" class="btn-check" name="userType" id="student" [(ngModel)]="loginData.userType" value="student" checked>
+                <label class="btn btn-outline-primary" for="student">
+                  <i class="bi bi-mortarboard me-2"></i>Student
+                </label>
+                
+                <input type="radio" class="btn-check" name="userType" id="staff" [(ngModel)]="loginData.userType" value="staff">
+                <label class="btn btn-outline-primary" for="staff">
+                  <i class="bi bi-briefcase me-2"></i>Staff
+                </label>
+                
+                <input type="radio" class="btn-check" name="userType" id="security" [(ngModel)]="loginData.userType" value="security">
+                <label class="btn btn-outline-primary" for="security">
+                  <i class="bi bi-shield-check me-2"></i>Security
+                </label>
+              </div>
+            </div>
+
+            <!-- Remember & Forgot -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="remember"
+                  [(ngModel)]="loginData.remember"
+                  name="remember"
+                >
+                <label class="form-check-label text-muted" for="remember">
+                  Remember me for 30 days
+                </label>
+              </div>
+              <a href="#" class="text-decoration-none text-primary small fw-semibold">
+                <i class="bi bi-question-circle me-1"></i>Forgot password?
+              </a>
+            </div>
+
+            <!-- Submit Button -->
+            <button
+              type="submit"
+              class="btn btn-primary btn-lg w-100 mb-4"
+              [disabled]="!loginForm.form.valid"
+            >
+              <i class="bi bi-box-arrow-in-right me-2"></i>
+              Sign In to CampusFind
+            </button>
+
+            <!-- Sign Up Link -->
+            <div class="text-center mt-4">
+              <p class="text-muted mb-0">
+                Don't have an account?
+                <a href="#" class="text-decoration-none text-primary fw-semibold" (click)="toggleForm($event)">
+                  Sign Up
+                </a>
+              </p>
+            </div>
+          </form>
+        </div>
+
+        <!-- Signup Form -->
+        <div *ngIf="isSignUp">
+          <!-- Header -->
+          <div class="text-center mb-5">
+            <div class="rounded-circle bg-success bg-opacity-10 p-3 d-inline-flex mb-3">
+              <i class="bi bi-person-plus-fill text-success fs-1"></i>
+            </div>
+            <h2 class="h1 fw-bold text-dark mb-2">Create Account</h2>
+            <p class="text-muted">Join CampusFind community in less than 2 minutes</p>
+          </div>
+
+          <!-- Signup Form -->
+          <form (ngSubmit)="onSignUp()" #signupForm="ngForm">
+            <!-- Full Name -->
+            <div class="mb-3">
+              <label class="form-label fw-semibold text-dark">
+                <i class="bi bi-person text-primary me-2"></i>
+                Full Name
+              </label>
+              <div class="input-group">
+                <span class="input-group-text bg-light border-end-0">
+                  <i class="bi bi-person-fill text-muted"></i>
+                </span>
+                <input
+                  type="text"
+                  [(ngModel)]="signupData.fullName"
+                  name="fullName"
+                  class="form-control border-start-0"
+                  placeholder="John Doe"
+                  required
+                >
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label class="form-label fw-semibold text-dark">
+                <i class="bi bi-envelope text-primary me-2"></i>
+                Campus Email
+              </label>
+              <div class="input-group">
+                <span class="input-group-text bg-light border-end-0">
+                  <i class="bi bi-at text-muted"></i>
+                </span>
+                <input
+                  type="email"
+                  [(ngModel)]="signupData.email"
+                  name="email"
+                  class="form-control border-start-0"
+                  placeholder="name@university.edu"
+                  required
+                >
+              </div>
+              <small class="text-muted">Use your official campus email address</small>
+            </div>
+
+            <!-- Student/Staff ID -->
+            <div class="mb-3">
+              <label class="form-label fw-semibold text-dark">
+                <i class="bi bi-person-badge text-primary me-2"></i>
+                Campus ID
+              </label>
+              <div class="input-group">
+                <span class="input-group-text bg-light border-end-0">
+                  <i class="bi bi-card-text text-muted"></i>
+                </span>
+                <input
+                  type="text"
+                  [(ngModel)]="signupData.campusId"
+                  name="campusId"
+                  class="form-control border-start-0"
+                  placeholder="e.g., S12345678"
+                  required
+                >
+              </div>
+            </div>
+
+            <!-- User Type Selection -->
+            <div class="mb-3">
+              <label class="form-label fw-semibold text-dark">
+                <i class="bi bi-person-rolodex text-primary me-2"></i>
+                I am a
+              </label>
+              <div class="btn-group w-100" role="group">
+                <input type="radio" class="btn-check" name="signupUserType" id="signupStudent" [(ngModel)]="signupData.userType" value="student" checked>
+                <label class="btn btn-outline-primary" for="signupStudent">
+                  <i class="bi bi-mortarboard me-2"></i>Student
+                </label>
+                
+                <input type="radio" class="btn-check" name="signupUserType" id="signupStaff" [(ngModel)]="signupData.userType" value="staff">
+                <label class="btn btn-outline-primary" for="signupStaff">
+                  <i class="bi bi-briefcase me-2"></i>Staff
+                </label>
+                
+                <input type="radio" class="btn-check" name="signupUserType" id="signupSecurity" [(ngModel)]="signupData.userType" value="security">
+                <label class="btn btn-outline-primary" for="signupSecurity">
+                  <i class="bi bi-shield-check me-2"></i>Security
+                </label>
+              </div>
+            </div>
+
+            <!-- Phone Number -->
+            <div class="mb-3">
+              <small class="text-muted">Optional - for item recovery notifications</small>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+              <label class="form-label fw-semibold text-dark">
+                <i class="bi bi-lock text-primary me-2"></i>
+                Password
+              </label>
+              <div class="input-group">
+                <span class="input-group-text bg-light border-end-0">
+                  <i class="bi bi-key text-muted"></i>
+                </span>
+                <input
+                  [type]="showSignupPassword ? 'text' : 'password'"
+                  [(ngModel)]="signupData.password"
+                  name="password"
+                  class="form-control border-start-0"
+                  placeholder="Create a strong password"
+                  required
+                >
+                <button 
+                  type="button" 
+                  class="btn btn-outline-secondary border-start-0"
+                  (click)="toggleSignupPassword()"
+                >
+                  <i class="bi" [class.bi-eye]="!showSignupPassword" [class.bi-eye-slash]="showSignupPassword"></i>
+                </button>
+              </div>
+              <div class="password-strength mt-2">
+                <div class="progress" style="height: 4px;">
+                  <div class="progress-bar" 
+                       [ngClass]="{
+                         'bg-danger': passwordStrength === 'weak',
+                         'bg-warning': passwordStrength === 'medium',
+                         'bg-success': passwordStrength === 'strong'
+                       }"
+                       [style.width]="getPasswordStrengthWidth()">
+                  </div>
+                </div>
+                <small class="text-muted">{{ getPasswordStrengthText() }}</small>
+              </div>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="mb-4">
+              <label class="form-label fw-semibold text-dark">
+                <i class="bi bi-lock-fill text-primary me-2"></i>
+                Confirm Password
+              </label>
+              <div class="input-group">
+                <span class="input-group-text bg-light border-end-0">
+                  <i class="bi bi-key-fill text-muted"></i>
+                </span>
+                <input
+                  [type]="showConfirmPassword ? 'text' : 'password'"
+                  [(ngModel)]="signupData.confirmPassword"
+                  name="confirmPassword"
+                  class="form-control border-start-0"
+                  placeholder="Confirm your password"
+                  required
+                >
+                <button 
+                  type="button" 
+                  class="btn btn-outline-secondary border-start-0"
+                  (click)="toggleConfirmPassword()"
+                >
+                  <i class="bi" [class.bi-eye]="!showConfirmPassword" [class.bi-eye-slash]="showConfirmPassword"></i>
+                </button>
+              </div>
+              <div *ngIf="signupData.password && signupData.confirmPassword && signupData.password !== signupData.confirmPassword" 
+                   class="text-danger small mt-1">
+                <i class="bi bi-exclamation-triangle-fill me-1"></i>
+                Passwords do not match
+              </div>
+            </div>
+
+            <!-- Terms & Conditions -->
+            <div class="form-check mb-4">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="terms"
+                [(ngModel)]="signupData.agreeToTerms"
+                name="agreeToTerms"
+                required
+              >
+              <label class="form-check-label text-muted" for="terms">
+                I agree to the 
+                <a href="#" class="text-decoration-none text-primary">Terms of Service</a> 
+                and 
+                <a href="#" class="text-decoration-none text-primary">Privacy Policy</a>
+              </label>
+            </div>
+
+            <!-- Submit Button -->
+            <button
+              type="submit"
+              class="btn btn-success btn-lg w-100 mb-4"
+              [disabled]="!signupForm.form.valid || signupData.password !== signupData.confirmPassword"
+            >
+              <i class="bi bi-person-plus me-2"></i>
+              Create Account
+            </button>
+
+            <!-- Sign In Link -->
+            <div class="text-center mt-4">
+              <p class="text-muted mb-0">
+                Already have an account?
+                <a href="#" class="text-decoration-none text-primary fw-semibold" (click)="toggleForm($event)">
+                  Sign In
+                </a>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
