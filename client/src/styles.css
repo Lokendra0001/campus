@@ -1,0 +1,64 @@
+@import 'tailwindcss';
+
+:root {
+--primary: #6D28D9;
+  /* Royal Purple */
+  --primary-light: #8B5CF6;
+  /* Light Purple */
+  --primary-dark: #5B21B6;
+  /* Dark Purple */
+  --secondary: #D97706;
+  /* Amber Gold */
+  --accent: #FBBF24;
+  /* Light Gold */
+  --background: #FFFFFF;
+  /* White */
+  --surface: #FAF5FF;
+  /* Lavender Cream */
+  --text-primary: #000000;
+  /* Black */
+  --text-secondary: #6B7280;
+  /* Gray */
+  --border: #DDD6FE;
+  /* Light Purple */
+}
+
+@theme {
+  --color-primary: var(--primary);
+  --color-primary-light: var(--primary-light);
+  --color-primary-dark: var(--primary-dark);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-border: var(--border);
+
+}
+
+
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+}
+
+.btn-outline-primary {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
