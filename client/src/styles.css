@@ -1,25 +1,26 @@
 @import 'tailwindcss';
 
 :root {
---primary: #6D28D9;
-  /* Royal Purple */
-  --primary-light: #8B5CF6;
-  /* Light Purple */
-  --primary-dark: #5B21B6;
-  /* Dark Purple */
-  --secondary: #D97706;
-  /* Amber Gold */
-  --accent: #FBBF24;
-  /* Light Gold */
-  --background: #FFFFFF;
-  /* White */
-  --surface: #FAF5FF;
-  /* Lavender Cream */
-  --text-primary: #000000;
-  /* Black */
-  --text-secondary: #6B7280;
-  /* Gray */
-  --border: #DDD6FE;
+  --primary: #4F46E5;
+    /* Indigo */
+    --primary-light: #6366F1;
+    /* Light Indigo */
+    --primary-dark: #4338CA;
+    /* Dark Indigo */
+    --secondary: #7C3AED;
+    /* Purple */
+    --accent: #A78BFA;
+    /* Light Purple */
+    --background: #FFFFFF;
+    /* White */
+    --surface: #EEF2FF;
+    /* Indigo Cream */
+    --text-primary: #312E81;
+    /* Dark Indigo */
+    --text-secondary: #6B7280;
+    /* Gray */
+    --border: #C7D2FE;
+    /* Light Indigo */
   /* Light Purple */
 }
 
@@ -43,22 +44,7 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
-.btn-primary {
-  background-color: var(--primary-color);
-  border: none;
-}
 
-.btn-primary:hover {
-  background-color: var(--primary-dark);
+a {
+  text-decoration: none !important;
 }
-
-.btn-outline-primary {
-  color: var(--primary-color);
-  border-color: var(--primary-color);
-}
-
-.btn-outline-primary:hover {
-  background-color: var(--primary-color);
-  color: #fff;
-}
-

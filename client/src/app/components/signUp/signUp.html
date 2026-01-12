@@ -57,12 +57,43 @@
 
       <!-- Heading -->
       <div class="mb-8">
-        <h1 class="text-2xl font-bold text-text-primary mb-1">Sign In</h1>
+        <h1 class="text-2xl font-bold text-text-primary mb-1">Sign Up</h1>
         <p class="text-text-secondary text-xs">Welcome back! Please enter your details</p>
       </div>
 
       <!-- Form -->
-      <form class="space-y-4">
+      <form class="space-y-4" [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
+        <!-- UserName -->
+        <div>
+          <label class="text-xs font-medium mb-1 block">UserName</label>
+
+          <div
+            class="flex items-center text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30"
+          >
+            <!-- Icon -->
+            <div class="px-2 border-r border-gray-300 text-gray-400">
+              <lucide-angular name="user" size="17" />
+            </div>
+
+            <!-- Input -->
+            <input
+              type="text"
+              formControlName="name"
+              placeholder="Enter your userName"
+              class="w-full p-3 outline-none"
+            />
+          </div>
+
+          <p
+            *ngIf="signUpForm.get('name')?.touched && signUpForm.get('name')?.errors"
+            class="text-red-500 text-xs mt-1"
+          >
+            <span *ngIf="signUpForm.get('name')?.errors?.['required']">
+              User Name is required
+            </span>
+          </p>
+        </div>
+
         <!-- Email -->
         <div>
           <label class="text-xs font-medium mb-1 block">Email</label>
@@ -76,20 +107,29 @@
             </div>
 
             <!-- Input -->
-            <input type="email" placeholder="Enter your email" class="w-full p-3 outline-none" />
+            <input
+              type="email"
+              formControlName="email"
+              placeholder="Enter your email"
+              class="w-full p-3 outline-none"
+            />
           </div>
 
-          <!-- <p
-            *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid"
+          <p
+            *ngIf="signUpForm.get('email')?.touched && signUpForm.get('email')?.errors"
             class="text-red-500 text-xs mt-1"
           >
-            Enter a valid email
-          </p> -->
+            <span *ngIf="signUpForm.get('email')?.errors?.['required']"> Email is required </span>
+            <span *ngIf="signUpForm.get('email')?.errors?.['email']"> Enter a valid email </span>
+          </p>
         </div>
+
         <!-- Password -->
         <div>
           <label class="text-xs font-medium mb-1 block">Password</label>
-          <div class="relative flex items-center text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30">
+          <div
+            class="relative flex items-center text-sm border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30"
+          >
             <div class="px-2 border-r border-gray-300 text-gray-400">
               <lucide-angular name="lock-keyhole" size="17" />
             </div>
@@ -97,6 +137,7 @@
             <input
               placeholder="••••••••"
               class="w-full px-3 py-2.5 pr-10 outline-none"
+              formControlName="password"
               [type]="isPasswordVisible() ? 'text' : 'password'"
             />
             <button
@@ -104,9 +145,20 @@
               class="absolute right-3 top-1/2 -translate-y-1/2 text-text-secondary hover:text-text-primary cursor-pointer"
               (click)="togglePasswordVisibility()"
             >
-              <lucide-angular name="{{isPasswordVisible() ? 'eye' : 'eye-closed'}}" size="17" />
+              <lucide-angular name="{{ isPasswordVisible() ? 'eye' : 'eye-closed' }}" size="17" />
             </button>
           </div>
+          <p
+            *ngIf="signUpForm.get('password')?.touched && signUpForm.get('password')?.errors"
+            class="text-red-500 text-xs mt-1"
+          >
+            <span *ngIf="signUpForm.get('password')?.errors?.['required']">
+              Password is required
+            </span>
+            <span *ngIf="signUpForm.get('password')?.errors?.['minlength']">
+              Password must be at least 6 characters long
+            </span>
+          </p>
         </div>
 
         <!-- Remember -->
@@ -127,7 +179,7 @@
           type="submit"
           class="w-full mt-6 bg-primary hover:bg-primary-dark cursor-pointer text-white font-semibold py-2.5 rounded-lg text-sm hover:shadow-lg transition-all flex gap-1 items-center justify-center group overflow-hidden"
         >
-          Sign in
+          Sign Up
           <span class="relative">
             <lucide-angular
               name="arrow-up-right"
@@ -144,9 +196,11 @@
       </form>
 
       <!-- Footer -->
-      <div class="mt-4 text-center text-xs text-text-secondary">
-        Don’t have an account?
-        <a href="#" class="text-primary font-semibold hover:text-primary-dark"> Sign up </a>
+      <div class="mt-4 text-center text-xs text-text-primary">
+        Already have an account?
+        <a routerLink="/signin" class="text-primary font-semibold hover:text-primary-dark">
+          Sign in
+        </a>
       </div>
     </div>
   </div>

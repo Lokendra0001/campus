@@ -1,5 +1,11 @@
 import { Component, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CommonModule, NgIf } from '@angular/common';
 import {
@@ -19,11 +25,11 @@ import {
 } from 'lucide-angular';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-signIn',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, LucideAngularModule],
-  templateUrl: './login.html',
-  styleUrls: ['./login.css'],
+  imports: [CommonModule, FormsModule, RouterModule, LucideAngularModule, ReactiveFormsModule],
+  templateUrl: './SignIn.html',
+  styleUrls: ['./SignIn.css'],
   providers: [
     {
       provide: LUCIDE_ICONS,
@@ -41,13 +47,23 @@ import {
     },
   ],
 })
-export class Login {
+export class SignIn {
   isPasswordVisible = signal(false);
+  loginForm: FormGroup = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+  });
 
   togglePasswordVisibility() {
     this.isPasswordVisible.set(!this.isPasswordVisible());
   }
+
   onLogin() {
-    console.log('HELLO');
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      return;
+    }
+
+    console.log(this.loginForm.value);
   }
 }

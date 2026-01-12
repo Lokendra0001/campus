@@ -1,875 +1,474 @@
 <app-navbar></app-navbar>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FindIt - Home</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #4361ee;
-            --primary-dark: #3a0ca3;
-            --primary-light: #4cc9f0;
-            --secondary-color: #7209b7;
-            --accent-color: #f72585;
-            --light-color: #f8f9fa;
-            --light-bg: #f5f7ff;
-            --dark-color: #212529;
-            --gray-color: #6c757d;
-            --success-color: #4bb543;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #f8f9ff 0%, #f0f2ff 100%);
-            min-height: 100vh;
-            color: var(--dark-color);
-        }
-        
-        /* Hero Section */
-        .hero-section {
-            position: relative;
-            padding: 100px 0;
-            overflow: hidden;
-            background: linear-gradient(135deg, 
-                rgba(67, 97, 238, 0.05) 0%, 
-                rgba(114, 9, 183, 0.05) 50%, 
-                rgba(76, 201, 240, 0.05) 100%);
-        }
-        
-        .hero-bg-shape {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, 
-                rgba(67, 97, 238, 0.1) 0%, 
-                rgba(114, 9, 183, 0.1) 100%);
-            top: -300px;
-            right: -300px;
-            z-index: 1;
-        }
-        
-        .hero-bg-shape-2 {
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, 
-                rgba(76, 201, 240, 0.1) 0%, 
-                rgba(247, 37, 133, 0.1) 100%);
-            bottom: -200px;
-            left: -200px;
-            z-index: 1;
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .hero-title {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .hero-subtitle {
-            font-size: 1.2rem;
-            color: var(--gray-color);
-            margin-bottom: 2rem;
-            max-width: 600px;
-        }
-        
-        .hero-stats {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            margin-top: 3rem;
-        }
-        
-        .stat-item {
-            text-align: center;
-            padding: 0 1rem;
-        }
-        
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--primary-color);
-            line-height: 1;
-        }
-        
-        .stat-label {
-            color: var(--gray-color);
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-        }
-        
-        /* Feature Cards */
-        .feature-card {
-            background: white;
-            border-radius: 20px;
-            padding: 2.5rem;
-            height: 100%;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(67, 97, 238, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(67, 97, 238, 0.15);
-        }
-        
-        .feature-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            color: white;
-            font-size: 1.8rem;
-        }
-        
-        /* Button Styles */
-        .btn-gradient {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            border: none;
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 12px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .btn-gradient:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(67, 97, 238, 0.3);
-            color: white;
-        }
-        
-        .btn-outline-gradient {
-            background: transparent;
-            border: 2px solid transparent;
-            background-image: linear-gradient(white, white), 
-                              linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            background-origin: border-box;
-            background-clip: padding-box, border-box;
-            color: var(--primary-color);
-            padding: calc(1rem - 2px) calc(2rem - 2px);
-            border-radius: 12px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-outline-gradient:hover {
-            background-image: linear-gradient(var(--primary-color), var(--primary-color)), 
-                              linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            transform: translateY(-3px);
-        }
-        
-        /* Section Headers */
-        .section-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .section-subtitle {
-            color: var(--gray-color);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        /* Process Steps */
-        .process-step {
-            position: relative;
-            padding: 2rem;
-            text-align: center;
-        }
-        
-        .step-number {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 0 auto 1.5rem;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .process-steps-container {
-            position: relative;
-        }
-        
-        .process-steps-container::before {
-            content: '';
-            position: absolute;
-            top: 30px;
-            left: 50px;
-            right: 50px;
-            height: 2px;
-            background: linear-gradient(90deg, 
-                var(--primary-color) 0%, 
-                var(--secondary-color) 50%, 
-                var(--accent-color) 100%);
-            z-index: 1;
-        }
-        
-        /* Testimonials */
-        .testimonial-card {
-            background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            height: 100%;
-            border: 1px solid rgba(67, 97, 238, 0.1);
-        }
-        
-        .testimonial-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 1rem;
-            border: 3px solid var(--primary-color);
-            padding: 2px;
-        }
-        
-        .testimonial-rating {
-            color: #ffc107;
-            margin-bottom: 1rem;
-        }
-        
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            padding: 5rem 0;
-            border-radius: 40px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            top: -150px;
-            right: -150px;
-        }
-        
-        .cta-section::after {
-            content: '';
-            position: absolute;
-            width: 200px;
-            height: 200px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            bottom: -100px;
-            left: -100px;
-        }
-        
-        .cta-content {
-            position: relative;
-            z-index: 2;
-            color: white;
-            text-align: center;
-        }
-        
-        /* Animation Classes */
-        .fade-in {
-            animation: fadeIn 0.8s ease forwards;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .float-animation {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.5rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .process-steps-container::before {
-                display: none;
-            }
-            
-            .cta-section {
-                padding: 3rem 1rem;
-                border-radius: 30px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Home Component -->
-    <div class="home-component">
-        <!-- Hero Section -->
-        <section class="hero-section">
-            <div class="hero-bg-shape"></div>
-            <div class="hero-bg-shape-2"></div>
-            
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 hero-content fade-in">
-                        <h1 class="hero-title">
-                            Find Your Lost Items <br>
-                            <span style="color: var(--dark-color);">In Just A Few Clicks</span>
-                        </h1>
-                        <p class="hero-subtitle">
-                            Our AI-powered platform helps you find lost items quickly and securely. 
-                            Join thousands of satisfied users who've reunited with their belongings.
-                        </p>
-                        
-                        <div class="d-flex flex-wrap gap-3 mb-4">
-                            <button class="btn-gradient">
-                                <i class="fas fa-search"></i> Find Lost Item
-                            </button>
-                            <button class="btn-outline-gradient">
-                                <i class="fas fa-plus"></i> Report Found Item
-                            </button>
-                        </div>
-                        
-                        <div class="d-flex align-items-center gap-4">
-                            <div class="d-flex align-items-center">
-                                <i class="fas fa-shield-alt text-primary me-2"></i>
-                                <span>100% Secure</span>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <i class="fas fa-bolt text-primary me-2"></i>
-                                <span>Fast Recovery</span>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <i class="fas fa-users text-primary me-2"></i>
-                                <span>Community Driven</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-6 mt-5 mt-lg-0">
-                        <div class="position-relative float-animation">
-                            <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                                 alt="Lost and Found Illustration" 
-                                 class="img-fluid rounded-4 shadow-lg">
-                            
-                            <!-- Floating Element 1 -->
-                            <div class="position-absolute top-0 start-0 bg-white p-3 rounded-3 shadow"
-                                 style="transform: translate(-30%, -30%); width: 180px;">
-                                <div class="d-flex align-items-center">
-                                    <div class="bg-primary rounded-circle p-2 me-2">
-                                        <i class="fas fa-wallet text-white"></i>
-                                    </div>
-                                    <div>
-                                        <div class="fw-bold">Wallet Found</div>
-                                        <small class="text-muted">Today</small>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Floating Element 2 -->
-                            <div class="position-absolute bottom-0 end-0 bg-white p-3 rounded-3 shadow"
-                                 style="transform: translate(30%, 30%); width: 180px;">
-                                <div class="d-flex align-items-center">
-                                    <div class="bg-primary rounded-circle p-2 me-2">
-                                        <i class="fas fa-mobile-alt text-white"></i>
-                                    </div>
-                                    <div>
-                                        <div class="fw-bold">Phone Recovered</div>
-                                        <small class="text-muted">Just Now</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Stats Section -->
-                <div class="hero-stats fade-in" style="animation-delay: 0.3s;">
-                    <div class="row">
-                        <div class="col-md-3 col-6">
-                            <div class="stat-item">
-                                <div class="stat-number">15,842+</div>
-                                <div class="stat-label">Items Reunited</div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-6">
-                            <div class="stat-item">
-                                <div class="stat-number">9,523+</div>
-                                <div class="stat-label">Happy Users</div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-6">
-                            <div class="stat-item">
-                                <div class="stat-number">97.3%</div>
-                                <div class="stat-label">Success Rate</div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-6">
-                            <div class="stat-item">
-                                <div class="stat-number">48h</div>
-                                <div class="stat-label">Avg. Recovery Time</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+<div class="bg-background mt-40 space-y-10">
+  <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+    <!-- Left Content -->
+    <div class="space-y-5">
+      <h1 class="text-3xl md:text-4xl font-bold text-text-primary leading-tight">
+        Lost & Found,<br />
+        <span class="text-primary">Made Simple</span>
+      </h1>
 
-        <!-- How It Works -->
-        <section class="py-5">
-            <div class="container">
-                <div class="section-header fade-in">
-                    <h2 class="section-title">How It Works</h2>
-                    <p class="section-subtitle">Get your lost items back in three simple steps</p>
-                </div>
-                
-                <div class="process-steps-container">
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="process-step fade-in" style="animation-delay: 0.2s;">
-                                <div class="step-number">1</div>
-                                <h4 class="fw-bold mb-3">Report Your Lost Item</h4>
-                                <p class="text-muted">
-                                    Describe your lost item with details like location, time, and unique features.
-                                    Our AI will start searching immediately.
-                                </p>
-                                <div class="mt-3">
-                                    <i class="fas fa-clock text-primary me-2"></i>
-                                    <small>Takes 2 minutes</small>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-lg-4">
-                            <div class="process-step fade-in" style="animation-delay: 0.4s;">
-                                <div class="step-number">2</div>
-                                <h4 class="fw-bold mb-3">Smart AI Matching</h4>
-                                <p class="text-muted">
-                                    Our advanced AI matches your description with found items in our database.
-                                    Get instant notifications for potential matches.
-                                </p>
-                                <div class="mt-3">
-                                    <i class="fas fa-brain text-primary me-2"></i>
-                                    <small>AI Powered Matching</small>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="col-lg-4">
-                            <div class="process-step fade-in" style="animation-delay: 0.6s;">
-                                <div class="step-number">3</div>
-                                <h4 class="fw-bold mb-3">Secure Recovery</h4>
-                                <p class="text-muted">
-                                    Once matched, we facilitate a secure handover process with identity verification.
-                                    Your item is returned safely to you.
-                                </p>
-                                <div class="mt-3">
-                                    <i class="fas fa-shield-alt text-primary me-2"></i>
-                                    <small>Verified & Secure</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+      <p class="text-text-secondary text-sm md:text-base max-w-md">
+        CampusFind helps students quickly reconnect with lost items using a simple, secure, and
+        community-driven platform.
+      </p>
 
-        <!-- Features Section -->
-        <section class="py-5 bg-light">
-            <div class="container">
-                <div class="section-header fade-in">
-                    <h2 class="section-title">Why Choose FindIt</h2>
-                    <p class="section-subtitle">Experience the best lost & found platform with unique features</p>
-                </div>
-                
-                <div class="row g-4">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="feature-card fade-in" style="animation-delay: 0.2s;">
-                            <div class="feature-icon">
-                                <i class="fas fa-robot"></i>
-                            </div>
-                            <h4 class="fw-bold mb-3">AI-Powered Search</h4>
-                            <p class="text-muted">
-                                Advanced artificial intelligence that understands descriptions and finds matches with high accuracy.
-                            </p>
-                            <ul class="list-unstyled mt-3">
-                                <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Image recognition</li>
-                                <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Natural language processing</li>
-                                <li><i class="fas fa-check text-primary me-2"></i> Real-time matching</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-4 col-md-6">
-                        <div class="feature-card fade-in" style="animation-delay: 0.4s;">
-                            <div class="feature-icon">
-                                <i class="fas fa-map-marked-alt"></i>
-                            </div>
-                            <h4 class="fw-bold mb-3">Location Tracking</h4>
-                            <p class="text-muted">
-                                Pinpoint locations on interactive maps and receive alerts when items are found near you.
-                            </p>
-                            <ul class="list-unstyled mt-3">
-                                <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> GPS integration</li>
-                                <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Geofence alerts</li>
-                                <li><i class="fas fa-check text-primary me-2"></i> Heatmap analytics</li>
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-4 col-md-6">
-                        <div class="feature-card fade-in" style="animation-delay: 0.6s;">
-                            <div class="feature-icon">
-                                <i class="fas fa-shield-alt"></i>
-                            </div>
-                            <h4 class="fw-bold mb-3">Secure Verification</h4>
-                            <p class="text-muted">
-                                Multi-layer security with identity verification, secure messaging, and encrypted transactions.
-                            </p>
-                            <ul class="list-unstyled mt-3">
-                                <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> Two-factor authentication</li>
-                                <li class="mb-2"><i class="fas fa-check text-primary me-2"></i> End-to-end encryption</li>
-                                <li><i class="fas fa-check text-primary me-2"></i> Secure payment gateway</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+      <div class="flex gap-3">
+        <button
+          class="px-5 py-2.5 text-sm font-semibold rounded-lg bg-primary text-white hover:bg-primary-dark transition"
+        >
+          Find Item
+        </button>
 
-        <!-- Admin Section -->
-        <section class="py-5">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 mb-5 mb-lg-0">
-                        <div class="position-relative fade-in">
-                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                                 alt="Admin Dashboard" 
-                                 class="img-fluid rounded-4 shadow-lg">
-                            
-                            <!-- Dashboard Elements -->
-                            <div class="position-absolute top-0 start-0 bg-white p-3 rounded-3 shadow"
-                                 style="transform: translate(-20%, -30%); width: 200px;">
-                                <div class="d-flex align-items-center mb-2">
-                                    <div class="bg-success rounded-circle p-1 me-2">
-                                        <i class="fas fa-chart-line text-white"></i>
-                                    </div>
-                                    <div>
-                                        <div class="fw-bold">Analytics</div>
-                                        <small class="text-muted">Real-time data</small>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="position-absolute bottom-0 end-0 bg-white p-3 rounded-3 shadow"
-                                 style="transform: translate(20%, 30%); width: 200px;">
-                                <div class="d-flex align-items-center mb-2">
-                                    <div class="bg-primary rounded-circle p-1 me-2">
-                                        <i class="fas fa-users text-white"></i>
-                                    </div>
-                                    <div>
-                                        <div class="fw-bold">User Management</div>
-                                        <small class="text-muted">500+ active</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-6 fade-in" style="animation-delay: 0.3s;">
-                        <h2 class="section-title text-start mb-4">Powerful Admin Dashboard</h2>
-                        <p class="text-muted mb-4">
-                            Take full control of lost and found operations with our comprehensive admin panel. 
-                            Monitor activity, manage users, and ensure smooth operations.
-                        </p>
-                        
-                        <div class="mb-4">
-                            <div class="d-flex align-items-start mb-3">
-                                <div class="bg-primary bg-opacity-10 rounded p-2 me-3">
-                                    <i class="fas fa-chart-bar text-primary"></i>
-                                </div>
-                                <div>
-                                    <h5 class="fw-bold">Advanced Analytics</h5>
-                                    <p class="text-muted mb-0">Track recovery rates, user activity, and operational metrics</p>
-                                </div>
-                            </div>
-                            
-                            <div class="d-flex align-items-start mb-3">
-                                <div class="bg-primary bg-opacity-10 rounded p-2 me-3">
-                                    <i class="fas fa-cogs text-primary"></i>
-                                </div>
-                                <div>
-                                    <h5 class="fw-bold">Automated Workflows</h5>
-                                    <p class="text-muted mb-0">Streamline operations with automated matching and notifications</p>
-                                </div>
-                            </div>
-                            
-                            <div class="d-flex align-items-start">
-                                <div class="bg-primary bg-opacity-10 rounded p-2 me-3">
-                                    <i class="fas fa-shield-alt text-primary"></i>
-                                </div>
-                                <div>
-                                    <h5 class="fw-bold">Security Controls</h5>
-                                    <p class="text-muted mb-0">Manage permissions, verify users, and ensure data protection</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="d-flex flex-wrap gap-3">
-                            <button class="btn-gradient">
-                                <i class="fas fa-user-plus"></i> Become Admin
-                            </button>
-                            <button class="btn-outline-gradient">
-                                <i class="fas fa-sign-in-alt"></i> Admin Login
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <button
+          class="px-5 py-2.5 text-sm font-semibold rounded-lg border border-primary text-primary hover:bg-surface transition"
+        >
+          Report Item
+        </button>
+      </div>
 
-        <!-- Testimonials -->
-        <section class="py-5 bg-light">
-            <div class="container">
-                <div class="section-header fade-in">
-                    <h2 class="section-title">Success Stories</h2>
-                    <p class="section-subtitle">See what our users have to say about their experience</p>
-                </div>
-                
-                <div class="row g-4">
-                    <div class="col-lg-4">
-                        <div class="testimonial-card fade-in" style="animation-delay: 0.2s;">
-                            <div class="d-flex align-items-center mb-3">
-                                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" 
-                                     alt="User" 
-                                     class="testimonial-avatar">
-                                <div class="ms-3">
-                                    <h6 class="fw-bold mb-0">Sarah Johnson</h6>
-                                    <small class="text-muted">Recovered lost passport</small>
-                                </div>
-                            </div>
-                            <div class="testimonial-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <p class="text-muted">
-                                "I lost my passport at the airport and was devastated. FindIt helped me recover it within 24 hours. The process was smooth and secure!"
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-4">
-                        <div class="testimonial-card fade-in" style="animation-delay: 0.4s;">
-                            <div class="d-flex align-items-center mb-3">
-                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" 
-                                     alt="User" 
-                                     class="testimonial-avatar">
-                                <div class="ms-3">
-                                    <h6 class="fw-bold mb-0">Michael Chen</h6>
-                                    <small class="text-muted">Found valuable laptop</small>
-                                </div>
-                            </div>
-                            <div class="testimonial-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                            <p class="text-muted">
-                                "As an admin, I appreciate how easy it is to manage found items. The dashboard is intuitive and the matching system works flawlessly."
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div class="col-lg-4">
-                        <div class="testimonial-card fade-in" style="animation-delay: 0.6s;">
-                            <div class="d-flex align-items-center mb-3">
-                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" 
-                                     alt="User" 
-                                     class="testimonial-avatar">
-                                <div class="ms-3">
-                                    <h6 class="fw-bold mb-0">Emma Rodriguez</h6>
-                                    <small class="text-muted">Reunited with wedding ring</small>
-                                </div>
-                            </div>
-                            <div class="testimonial-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <p class="text-muted">
-                                "I thought I'd never see my grandmother's wedding ring again. Thanks to FindIt, it was returned to me. This service is life-changing!"
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="cta-section mt-5">
-            <div class="container">
-                <div class="cta-content fade-in">
-                    <h2 class="display-4 fw-bold mb-4">Ready to Find Your Lost Item?</h2>
-                    <p class="fs-5 mb-5 opacity-75">Join thousands of satisfied users and experience the easiest way to recover lost belongings.</p>
-                    
-                    <div class="d-flex flex-column flex-md-row gap-3 justify-content-center align-items-center">
-                        <button class="btn btn-light btn-lg px-5 py-3 rounded-pill fw-bold shadow">
-                            <i class="fas fa-rocket me-2"></i> Get Started Free
-                        </button>
-                        <button class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill fw-bold">
-                            <i class="fas fa-play-circle me-2"></i> Watch Demo
-                        </button>
-                    </div>
-                    
-                    <div class="mt-5">
-                        <p class="mb-0 opacity-75">
-                            <i class="fas fa-lock me-2"></i> Your data is secure with us
-                            <span class="mx-3">•</span>
-                            <i class="fas fa-clock me-2"></i> 24/7 Customer Support
-                            <span class="mx-3">•</span>
-                            <i class="fas fa-check-circle me-2"></i> No Credit Card Required
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
+      <!-- Stats -->
+      <div class="flex gap-6 pt-4">
+        <div>
+          <p class="text-lg font-bold text-primary">2.8K+</p>
+          <p class="text-xs text-text-secondary">Items Found</p>
+        </div>
+        <div>
+          <p class="text-lg font-bold text-primary">94%</p>
+          <p class="text-xs text-text-secondary">Success Rate</p>
+        </div>
+        <div>
+          <p class="text-lg font-bold text-primary">24/7</p>
+          <p class="text-xs text-text-secondary">Available</p>
+        </div>
+      </div>
     </div>
 
+    <!-- Right Image -->
+    <!-- Right Side Unique Section -->
+    <div class="flex justify-center md:justify-end relative w-full max-w-md">
+      <!-- Animated Background Elements -->
+      <div class="absolute inset-0">
+        <div
+          class="absolute top-0 -left-8 w-24 h-24 rounded-full bg-gradient-to-br from-primary/30 to-primary-light/20 animate-float-slow"
+        ></div>
+        <div
+          class="absolute bottom-0 -right-8 w-32 h-32 rounded-full bg-gradient-to-br from-accent/20 to-accent/10 animate-float-medium"
+        ></div>
+        <div
+          class="absolute top-1/3 right-0 w-20 h-20 rounded-full bg-gradient-to-br from-secondary/25 to-secondary/10 animate-float-fast"
+        ></div>
+      </div>
 
-    <app-footer></app-footer>
+      <!-- Floating Item Cards -->
+      <div class="relative space-y-6 z-10">
+        <!-- Card 1 -->
+        <div
+          class="group bg-white border border-border/50 rounded-2xl p-4 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex items-center gap-4 backdrop-blur-sm bg-white/95"
+        >
+          <div class="relative">
+            <div
+              class="w-14 h-14 bg-gradient-to-br from-primary to-primary-light rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300"
+            >
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScisHQ4wAPIlNZnlL6mFuOg1gtP_1d0VfC5w&s"
+                alt=""
+                class="object-cover h-full w-full rounded-xl"
+              />
+              <i class="fas fa-backpack text-white text-lg"></i>
+            </div>
+            <div
+              class="absolute -top-1 -right-1 w-4 h-4 bg-accent rounded-full border-2 border-white"
+            ></div>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between mb-1">
+              <h4 class="font-bold text-text-primary text-base">College Backpack</h4>
+              <span class="text-xs font-medium bg-primary/10 text-primary px-2 py-0.5 rounded-full"
+                >Just Found</span
+              >
+            </div>
+            <p class="text-text-secondary text-sm flex items-center gap-1">
+              <i class="fas fa-map-marker-alt text-xs text-primary"></i>
+              Main Library • 2 hours ago
+            </p>
+          </div>
+          <i
+            class="fas fa-chevron-right text-primary/40 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300"
+          ></i>
+        </div>
 
-    <!-- Scripts -->
-    <script>
-        // Animation on scroll
-        document.addEventListener('DOMContentLoaded', function() {
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -100px 0px'
-            };
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if(entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, observerOptions);
-            
-            // Observe all fade-in elements
-            document.querySelectorAll('.fade-in').forEach(el => {
-                el.style.opacity = '0';
-                el.style.transform = 'translateY(20px)';
-                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-                observer.observe(el);
-            });
-            
-            // Button hover effects
-            const buttons = document.querySelectorAll('.btn-gradient, .btn-outline-gradient');
-            buttons.forEach(btn => {
-                btn.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-3px)';
-                });
-                
-                btn.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0)';
-                });
-            });
-            
-            // Feature card hover effects
-            const cards = document.querySelectorAll('.feature-card');
-            cards.forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-10px)';
-                    this.style.boxShadow = '0 20px 40px rgba(67, 97, 238, 0.15)';
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0)';
-                    this.style.boxShadow = '';
-                });
-            });
-        });
-    </script>
-</body>
-</html>
+        <!-- Card 2 -->
+        <div
+          class="group bg-white border border-border/50 rounded-2xl p-4 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 ml-6 flex items-center gap-4 backdrop-blur-sm bg-white/95"
+        >
+          <div class="relative">
+            <div
+              class="w-14 h-14 bg-gradient-to-br from-accent to-accent/80 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300"
+            >
+              <img
+                src="https://i.redd.it/rip-14-pro-max-also-how-to-disable-lost-mode-without-faceid-v0-6cavyq4jxtcf1.jpg?width=3024&format=pjpg&auto=webp&s=acae84df1f37fb610d25e0e45882059dc49d2543"
+                alt=""
+                class="object-cover h-full w-full rounded-xl"
+              />
+              <i class="fas fa-mobile-alt text-white text-lg"></i>
+            </div>
+            <div
+              class="absolute -top-1 -right-1 w-4 h-4 bg-secondary rounded-full border-2 border-white"
+            ></div>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between mb-1">
+              <h4 class="font-bold text-text-primary text-base">iPhone 14 Pro</h4>
+              <span class="text-xs font-medium bg-accent/10 text-secondary px-2 py-0.5 rounded-full"
+                >Verified</span
+              >
+            </div>
+            <p class="text-text-secondary text-sm flex items-center gap-1">
+              <i class="fas fa-map-marker-alt text-xs text-accent"></i>
+              Student Cafeteria • 1 day ago
+            </p>
+          </div>
+          <i
+            class="fas fa-chevron-right text-primary/40 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300"
+          ></i>
+        </div>
 
+        <!-- Card 3 -->
+        <div
+          class="group bg-white border border-border/50 rounded-2xl p-4 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 -ml-3 flex items-center gap-4 backdrop-blur-sm bg-white/95"
+        >
+          <div class="relative">
+            <div
+              class="w-14 h-14 bg-gradient-to-br from-secondary to-secondary/80 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300"
+            >
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSikrtCZPza8kJsb9tZO4-aoMdKMgP5g7oSUA&s"
+                alt=""
+                class="object-cover h-full w-full rounded-xl"
+              />
+              <i class="fas fa-wallet text-white text-lg"></i>
+            </div>
+            <div
+              class="absolute -top-1 -right-1 w-4 h-4 bg-primary rounded-full border-2 border-white"
+            ></div>
+          </div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between mb-1">
+              <h4 class="font-bold text-text-primary text-base">Student Wallet</h4>
+              <span
+                class="text-xs font-medium bg-secondary/10 text-secondary px-2 py-0.5 rounded-full"
+                >ID Found</span
+              >
+            </div>
+            <p class="text-text-secondary text-sm flex items-center gap-1">
+              <i class="fas fa-map-marker-alt text-xs text-secondary"></i>
+              Admin Office • Yesterday
+            </p>
+          </div>
+          <i
+            class="fas fa-chevron-right text-primary/40 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300"
+          ></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add these animations to your CSS -->
+    <style>
+      @keyframes float-slow {
+        0%,
+        100% {
+          transform: translateY(0) translateX(0);
+        }
+        50% {
+          transform: translateY(-10px) translateX(5px);
+        }
+      }
+
+      @keyframes float-medium {
+        0%,
+        100% {
+          transform: translateY(0) translateX(0);
+        }
+        50% {
+          transform: translateY(-15px) translateX(-5px);
+        }
+      }
+
+      @keyframes float-fast {
+        0%,
+        100% {
+          transform: translateY(0) translateX(0);
+        }
+        50% {
+          transform: translateY(-8px) translateX(8px);
+        }
+      }
+
+      .animate-float-slow {
+        animation: float-slow 6s ease-in-out infinite;
+      }
+
+      .animate-float-medium {
+        animation: float-medium 8s ease-in-out infinite;
+      }
+
+      .animate-float-fast {
+        animation: float-fast 4s ease-in-out infinite;
+      }
+    </style>
+  </div>
+
+  <!-- How It Works Section -->
+  <section class="py-20 bg-white overflow-hidden">
+    <div class="container mx-auto px-4">
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span
+          class="inline-block px-4 py-1.5 bg-gradient-to-r from-primary/10 to-accent/10 text-primary font-semibold rounded-full text-sm mb-4"
+        >
+          SIMPLE PROCESS
+        </span>
+        <h2 class="text-4xl font-bold text-gray-900 mb-6">
+          How <span class="text-primary">CampusFind</span> Works
+        </h2>
+        <p class="text-gray-600 text-lg">
+          Recover your lost items or help others in just a few simple steps
+        </p>
+      </div>
+
+      <!-- Steps with Connecting Line -->
+      <div class="relative">
+        <!-- Connecting Line for Desktop -->
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-6 relative">
+          <!-- Step 1 -->
+          <div class="group relative">
+            <div
+              class="relative z-10 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 p-8 text-center border border-gray-100"
+            >
+              <!-- Step Number Badge -->
+              <div
+                class="absolute -top-4 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-gradient-to-br from-primary to-primary-light rounded-full flex items-center justify-center shadow-lg border-4 border-white"
+              >
+                <span class="text-white font-bold text-lg">1</span>
+              </div>
+
+              <!-- Icon Container -->
+              <div
+                class="w-20 h-20 bg-gradient-to-br from-primary/10 to-primary/5 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300"
+              >
+                <div
+                  class="w-14 h-14 bg-gradient-to-br from-primary to-primary-light rounded-xl flex items-center justify-center shadow-lg"
+                >
+                  <i class="fas fa-search text-white text-2xl"></i>
+                </div>
+              </div>
+
+              <h3 class="text-xl font-bold text-gray-900 mb-3">Search & Browse</h3>
+              <p class="text-gray-600 mb-4">
+                Quickly search through thousands of found items or browse by category
+              </p>
+
+              <!-- Feature List -->
+              <div class="space-y-2 text-left">
+                <div class="flex items-center gap-2 text-sm">
+                  <i class="fas fa-check-circle text-primary text-sm"></i>
+                  <span class="text-gray-600">Search by location</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm">
+                  <i class="fas fa-check-circle text-primary text-sm"></i>
+                  <span class="text-gray-600">Filter by date</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm">
+                  <i class="fas fa-check-circle text-primary text-sm"></i>
+                  <span class="text-gray-600">View images</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Connecting Arrow -->
+            <div
+              class="hidden md:block absolute top-1/2 right-0 transform translate-x-1/2 -translate-y-1/2 z-20"
+            >
+              <div
+                class="w-8 h-8 bg-gradient-to-r from-primary to-accent rounded-full flex items-center justify-center shadow-lg"
+              >
+                <i class="fas fa-arrow-right text-white text-sm"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="group relative">
+            <div
+              class="relative z-10 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 p-8 text-center border border-gray-100"
+            >
+              <div
+                class="absolute -top-4 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-gradient-to-br from-accent to-accent/80 rounded-full flex items-center justify-center shadow-lg border-4 border-white"
+              >
+                <span class="text-white font-bold text-lg">2</span>
+              </div>
+
+              <div
+                class="w-20 h-20 bg-gradient-to-br from-accent/10 to-accent/5 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300"
+              >
+                <div
+                  class="w-14 h-14 bg-gradient-to-br from-accent to-accent/80 rounded-xl flex items-center justify-center shadow-lg"
+                >
+                  <i class="fas fa-plus text-white text-2xl"></i>
+                </div>
+              </div>
+
+              <h3 class="text-xl font-bold text-gray-900 mb-3">Report Item</h3>
+              <p class="text-gray-600 mb-4">
+                Report lost or found items with photos and detailed descriptions
+              </p>
+
+              <div class="space-y-2 text-left">
+                <div class="flex items-center gap-2 text-sm">
+                  <i class="fas fa-check-circle text-accent text-sm"></i>
+                  <span class="text-gray-600">Upload photos</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm">
+                  <i class="fas fa-check-circle text-accent text-sm"></i>
+                  <span class="text-gray-600">Add location details</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm">
+                  <i class="fas fa-check-circle text-accent text-sm"></i>
+                  <span class="text-gray-600">Set contact preferences</span>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="hidden md:block absolute top-1/2 right-0 transform translate-x-1/2 -translate-y-1/2 z-20"
+            >
+              <div
+                class="w-8 h-8 bg-gradient-to-r from-accent to-secondary rounded-full flex items-center justify-center shadow-lg"
+              >
+                <i class="fas fa-arrow-right text-white text-sm"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="group relative">
+            <div
+              class="relative z-10 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 p-8 text-center border border-gray-100"
+            >
+              <div
+                class="absolute -top-4 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-gradient-to-br from-secondary to-secondary/80 rounded-full flex items-center justify-center shadow-lg border-4 border-white"
+              >
+                <span class="text-white font-bold text-lg">3</span>
+              </div>
+
+              <div
+                class="w-20 h-20 bg-gradient-to-br from-secondary/10 to-secondary/5 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300"
+              >
+                <div
+                  class="w-14 h-14 bg-gradient-to-br from-secondary to-secondary/80 rounded-xl flex items-center justify-center shadow-lg"
+                >
+                  <i class="fas fa-link text-white text-2xl"></i>
+                </div>
+              </div>
+
+              <h3 class="text-xl font-bold text-gray-900 mb-3">Smart Matching</h3>
+              <p class="text-gray-600 mb-4">
+                Our AI instantly matches lost reports with found items
+              </p>
+
+              <div class="space-y-2 text-left">
+                <div class="flex items-center gap-2 text-sm">
+                  <i class="fas fa-check-circle text-secondary text-sm"></i>
+                  <span class="text-gray-600">Image recognition</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm">
+                  <i class="fas fa-check-circle text-secondary text-sm"></i>
+                  <span class="text-gray-600">Location matching</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm">
+                  <i class="fas fa-check-circle text-secondary text-sm"></i>
+                  <span class="text-gray-600">Time proximity</span>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="hidden md:block absolute top-1/2 right-0 transform translate-x-1/2 -translate-y-1/2 z-20"
+            >
+              <div
+                class="w-8 h-8 bg-gradient-to-r from-secondary to-primary rounded-full flex items-center justify-center shadow-lg"
+              >
+                <i class="fas fa-arrow-right text-white text-sm"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="group relative">
+            <div
+              class="relative z-10 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 p-8 text-center border border-gray-100"
+            >
+              <div
+                class="absolute -top-4 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-gradient-to-br from-primary to-primary-dark rounded-full flex items-center justify-center shadow-lg border-4 border-white"
+              >
+                <span class="text-white font-bold text-lg">4</span>
+              </div>
+
+              <div
+                class="w-20 h-20 bg-gradient-to-br from-primary-dark/10 to-primary-dark/5 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300"
+              >
+                <div
+                  class="w-14 h-14 bg-gradient-to-br from-primary-dark to-primary rounded-xl flex items-center justify-center shadow-lg"
+                >
+                  <i class="fas fa-handshake text-white text-2xl"></i>
+                </div>
+              </div>
+
+              <h3 class="text-xl font-bold text-gray-900 mb-3">Reunite Safely</h3>
+              <p class="text-gray-600 mb-4">
+                Connect securely and arrange pickup at safe campus locations
+              </p>
+
+              <div class="space-y-2 text-left">
+                <div class="flex items-center gap-2 text-sm">
+                  <i class="fas fa-check-circle text-primary-dark text-sm"></i>
+                  <span class="text-gray-600">Secure messaging</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm">
+                  <i class="fas fa-check-circle text-primary-dark text-sm"></i>
+                  <span class="text-gray-600">Safe pickup points</span>
+                </div>
+                <div class="flex items-center gap-2 text-sm">
+                  <i class="fas fa-check-circle text-primary-dark text-sm"></i>
+                  <span class="text-gray-600">Verification process</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA Below Steps -->
+      <div class="text-center mt-16">
+        <button
+          class="group bg-gradient-to-r from-primary to-primary-light text-white px-8 py-3.5 rounded-xl font-semibold text-lg hover:shadow-xl hover:scale-[1.02] transition-all duration-300 shadow-lg"
+        >
+          <span class="flex items-center gap-2">
+            Start Finding Now
+            <i
+              class="fas fa-arrow-right group-hover:translate-x-2 transition-transform duration-300"
+            ></i>
+          </span>
+        </button>
+        <p class="text-gray-500 text-sm mt-4">
+          It's free to use • No signup required to browse • 100% secure
+        </p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<app-footer></app-footer>
